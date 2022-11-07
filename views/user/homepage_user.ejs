@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/user_header.ejs') %>
+  <section class="bg-light">
+    <div class="container">
+      <nav class="navbar navbar-light justify-content-between">
+        <a class="navbar-brand" style="font-size: 40px">Home Page</a>
+        <a href="/logout" aria-pressed="true"
+          ><button class="btn btn-outline-success my-2 my-sm-0">
+            Log Out
+          </button></a
+        >
+      </nav>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-6 col-md-12 bg-white p-5">
+          <h1 class="text-info">WELCOME TO HOME PAGE</h1>
+          <p class="text-black-50">
+            Sed autem laudantium dolores. Voluptatem itaque ea consequatur
+            eveniet. Eum quas beatae cumque eum quaerat.
+          </p>
+          <img class="img-fluid" src="/image/stats-img.svg" alt="" />
+        </div>
+        <div class="col-12 col-lg-6 col-md-12 bg-white p-5">
+          <img class="img-fluid" src="/image/hero-img.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include('../partials/footer.ejs') %>
+</html>
