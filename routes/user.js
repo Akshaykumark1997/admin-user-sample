@@ -3,6 +3,7 @@ const user = require("../helpers/user_details");
 const sessions = require("express-session");
 const cookieParser = require("cookie-parser");
 const db = require("../confi/connection");
+const { response } = require("express");
 const router = express.Router();
 
 router.use(express.json());
@@ -25,45 +26,37 @@ router.use((req, res, next) => {
   next();
 });
 
-
-
 router.get("/", (req, res) => {
-  session = req.session;
-  if (session.userid) {
-    res.render('user/homepage_user');
+  let user = req.session.user;
+  console.log(user);
+  if (user) {
+    res.render("user/homepage_user");
   } else {
     res.render("user/login_user");
   }
 });
-router.post("/login", (req, res) => {
-  let email = req.body.email;
-  let password = req.body.password;
-  //  console.log(req.body.email);
-  //  console.log(req.body.password);
-  user.findUser(email).then((userDetails) => {
-     console.log(userDetails);
-     if (req.body.email === userDetails.email &&req.body.password === userDetails.password) {
-       session = req.session;
-       session.userid = req.body.email;
-       res.redirect("/home");
-     } else {
-       res.render("user/login_user", {
-         err_message: "username or password incorrect",
-       });
-     }
-    //  console.log(userDetails.email);
-    //  console.log(userDetails.password);
-
-  });
-});
-router.get("/home", (req, res) => {
-  session = req.session;
-  if (session.userid) {
-    res.render("user/homepage_user");
-  } else {
-    res.redirect("/");
+router.post('/login',(req,res)=>{
+  user.doLogin(req.body).then((response)=>{
+    if(response.status){
+      req.session.loggedIn=true;
+      console.log(req.session);
+      req.session.user= response.user;
+      res.redirect('/home');
+    }else{
+      res.redirect('/');
+    }
+  })
+})
+router.get('/home',(req,res)=>{
+  let user = req.session.user;
+  console.log(user);
+  if(user){
+    res.render('user/homepage_user');
+  }else{
+    res.render('user/login_user');
   }
-});
+})
+
 router.get("/signup", (req, res, next) => {
   res.render("user/signup_user");
   next();
@@ -71,8 +64,9 @@ router.get("/signup", (req, res, next) => {
 router.post("/signup", (req, res) => {
   console.log(req.body);
   if (req.body.password === req.body.repeatpassword) {
-    user.addUser(req.body, (result) => {
-      res.redirect("/");
+    user.addUser(req.body).then((data)=>{
+      console.log(data);
+      res.redirect('/');
     });
   } else {
     res.render("user/signup_user", {
@@ -88,21 +82,3 @@ router.get("/logout", (req, res) => {
 });
 
 module.exports = router;
-// router.get("/home", (req, res, next) => {
-//   res.render("user/homepage_user");
-//   next();
-// });
-// router.get("/home", (req, res) => {
-//   session = req.session;
-//   if (session.userid) {
-//     res.render("user/homepage_user");
-//   } else {
-//     res.redirect("/");
-//   }
-// });
-// router.get("/", (req, res, next) => {
-//   res.render("user/login_user");
-//   next();
-// });
-// req.body.email === userDetails.email && req.body.password === userDetails.password
-// userDetails.email === req.body.email &&userDetails.password === req.body.password;
