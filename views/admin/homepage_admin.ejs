@@ -7,6 +7,12 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>hai adminnnnn</h1>
+    <%- include('../partials/admin_header.ejs') %>
+    <a href="/admin/adminlogout"><button>logout</button></a>
   </body>
+  <script>
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+    }
+  </script>
 </html>

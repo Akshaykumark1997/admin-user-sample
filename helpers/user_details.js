@@ -4,6 +4,7 @@ module.exports = {
   addUser: (user) => {
     return new Promise(async (resolve, reject) => {
       user.password = await bcrypt.hash(user.password, 10);
+      user.repeatpassword = await bcrypt.hash(user.repeatpassword,10);
       db.get()
         .collection("users")
         .insertOne(user)

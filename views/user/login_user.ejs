@@ -54,7 +54,7 @@
             >
             <% if(locals.err_message){%>
             <div>
-              <h4><%=err_message%></h4>
+              <p class="text-danger"><%=err_message%></p>
             </div>
             <%}%>
             <p class="small fw-bold mt-5 pt-1 mb-0">
@@ -66,5 +66,10 @@
       </div>
     </div>
   </section>
+  <script>
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+    }
+  </script>
   <%- include('../partials/footer.ejs') %>
 </html>

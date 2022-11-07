@@ -1,29 +1,11 @@
 const express = require("express");
 const user = require("../helpers/user_details");
-const sessions = require("express-session");
-const cookieParser = require("cookie-parser");
 const db = require("../confi/connection");
 const { response } = require("express");
 const router = express.Router();
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-router.use(cookieParser());
-router.use(
-  sessions({
-    secret: "123",
-    resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 30000 },
-  })
-);
-router.use((req, res, next) => {
-  res.header(
-    "Cache-Control",
-    "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
-  );
-  next();
-});
 router.get("/", (req, res) => {
   let user = req.session.user;
   console.log(user);
@@ -41,7 +23,7 @@ router.post("/login", (req, res) => {
       req.session.user = response.user;
       res.redirect("/home");
     } else {
-      res.redirect("/");
+      res.render("user/login_user", { err_message: "username or password incorrect" });
     }
   });
 });
@@ -72,7 +54,6 @@ router.post("/signup", (req, res) => {
     });
   }
 });
-
 router.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");

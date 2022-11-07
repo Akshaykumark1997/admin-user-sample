@@ -25,10 +25,10 @@
                 <p class="text-white-50 mb-5">
                   Please enter your login and password!
                 </p>
-                <form action="">
+                <form action="/admin/adminlogin" method="post">
                   <div class="form-outline form-white mb-4">
                     <input
-                      type="email"
+                      type="email" name="email"
                       id="typeEmailX"
                       class="form-control form-control-lg"
                     />
@@ -37,7 +37,7 @@
 
                   <div class="form-outline form-white mb-4">
                     <input
-                      type="password"
+                      type="password" name="password"
                       id="typePasswordX"
                       class="form-control form-control-lg"
                     />
@@ -47,10 +47,15 @@
                   </div>
                   <button
                     class="btn btn-outline-primary btn-lg px-5 mt-5"
-                    type="submit"
+                    type="submit" value="login"
                   >
                     Login
                   </button>
+                  <% if(locals.err_message){%>
+        <div>
+          <h4><%=err_message%></h4>
+        </div>
+        <%}%>
                 </form>
               </div>
             </div>
@@ -60,4 +65,9 @@
     </div>
   </section>
   <%- include('../partials/footer.ejs') %>
+  <script>
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+    }
+  </script>
 </html>
