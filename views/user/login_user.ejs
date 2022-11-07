@@ -43,14 +43,20 @@
               />
               <label class="form-label" for="form1Example23">Password</label>
             </div>
-            <a href=""><button type="submit" value="login" class="btn btn-primary btn-lg btn-block ">
-              Log in
-            </button></a>
-             <% if(locals.err_message){%>
-        <div>
-          <h4><%=err_message%></h4>
-        </div>
-        <%}%>
+            <a href=""
+              ><button
+                type="submit"
+                value="login"
+                class="btn btn-primary btn-lg btn-block"
+              >
+                Log in
+              </button></a
+            >
+            <% if(locals.err_message){%>
+            <div>
+              <h4><%=err_message%></h4>
+            </div>
+            <%}%>
             <p class="small fw-bold mt-5 pt-1 mb-0">
               Don't have an account?
               <a href="/signup" class="link-danger">Sign Up</a>

@@ -17,7 +17,6 @@ router.use(
     cookie: { maxAge: 30000 },
   })
 );
-
 router.use((req, res, next) => {
   res.header(
     "Cache-Control",
@@ -25,7 +24,6 @@ router.use((req, res, next) => {
   );
   next();
 });
-
 router.get("/", (req, res) => {
   let user = req.session.user;
   console.log(user);
@@ -35,27 +33,27 @@ router.get("/", (req, res) => {
     res.render("user/login_user");
   }
 });
-router.post('/login',(req,res)=>{
-  user.doLogin(req.body).then((response)=>{
-    if(response.status){
-      req.session.loggedIn=true;
+router.post("/login", (req, res) => {
+  user.doLogin(req.body).then((response) => {
+    if (response.status) {
+      req.session.loggedIn = true;
       console.log(req.session);
-      req.session.user= response.user;
-      res.redirect('/home');
-    }else{
-      res.redirect('/');
+      req.session.user = response.user;
+      res.redirect("/home");
+    } else {
+      res.redirect("/");
     }
-  })
-})
-router.get('/home',(req,res)=>{
+  });
+});
+router.get("/home", (req, res) => {
   let user = req.session.user;
   console.log(user);
-  if(user){
-    res.render('user/homepage_user');
-  }else{
-    res.render('user/login_user');
+  if (user) {
+    res.render("user/homepage_user");
+  } else {
+    res.render("user/login_user");
   }
-})
+});
 
 router.get("/signup", (req, res, next) => {
   res.render("user/signup_user");
@@ -64,9 +62,9 @@ router.get("/signup", (req, res, next) => {
 router.post("/signup", (req, res) => {
   console.log(req.body);
   if (req.body.password === req.body.repeatpassword) {
-    user.addUser(req.body).then((data)=>{
+    user.addUser(req.body).then((data) => {
       console.log(data);
-      res.redirect('/');
+      res.redirect("/");
     });
   } else {
     res.render("user/signup_user", {
@@ -74,7 +72,6 @@ router.post("/signup", (req, res) => {
     });
   }
 });
-
 
 router.get("/logout", (req, res) => {
   req.session.destroy();
