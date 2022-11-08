@@ -24,7 +24,8 @@ module.exports ={
                 resolve(data);
               });
         });
-    },editUser:(id)=>{
+    },
+    editUser:(id)=>{
         return new Promise((resolve,reject)=>{
             db.get().collection('users').findOne({_id:objectId(id)}).then((data)=>{
             resolve(data);
@@ -42,5 +43,11 @@ module.exports ={
                 resolve();
             });
         });
-    }
+    },
+    // searchUser:(searchInput)=>{
+    //     return new Promise(async(resolve,reject)=>{
+    //      let allUsers = db.get().collection('users').find({name:searchInput}).toArray();
+    //      resolve(allUsers);
+    //     })
+    // }
 }

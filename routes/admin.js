@@ -77,6 +77,21 @@ router.get('/editUser/:id',async(req,res)=>{
 router.post('/editUser/:id',(req,res)=>{
   admin.editUserDetails(req.params.id,req.body).then(()=>{
     res.redirect('/admin/adminhome');
-  })
-}) 
+  });
+});
+// router.post('/search',(req,res)=>{
+//   let session = req.session;
+//   let searchInput = req.body.search;
+//   if(session.adminId){
+//     if(searchInput){
+//       console.log(searchInput);
+//       admin.searchUser(searchInput).then((allUsers)=>{
+//         console.log(allUsers);
+//         res.render("admin/homepage_admin", { allUsers });
+//       })
+//     }else{
+//       res.redirect('/admin/adminhome');
+//     }
+//   }
+// }) 
 module.exports = router;

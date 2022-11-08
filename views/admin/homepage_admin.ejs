@@ -1,34 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+
   <%- include('../partials/admin_header.ejs') %>
   <section class="bg-light">
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Admin Panel</a>
+          <a class="navbar-brand fw-bold fs-2" href="/admin/">Admin Panel</a>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" tabindex="-1">Disabled</a>
+                <a class="nav-link active" aria-current="page" href="/admin/">Home</a>
               </li>
             </ul>
-            <form class="d-flex">
+            <!-- <form class="d-flex" action="" method="post">
               <input
                 class="form-control me-2"
-                type="search"
+                type="search" name="search"
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button class="btn btn-outline-success" type="submit">
+              <a href=""><button class="btn btn-outline-success" type="submit">
                 Search
-              </button>
-            </form>
+              </button></a>
+            </form> -->
             <div class="p-2">
               <a href="/admin/adminlogout"><button class="btn btn-outline-success my-2 my-sm-0">
             Log Out
@@ -49,7 +42,7 @@
         </div>
         
       
-      <table class="table mt-5 table-hover table-light">
+      <table id="table" class="table mt-5 table-hover table-light" >
         <thead>
           <tr>
             <th class="col-3 col-md-3 col-lg-3 col-xl-1 text-center">Sl.No</th>
@@ -83,9 +76,18 @@
       
     </div>
   </section>
+  <%-include('../partials/footer.ejs') %>
   <script>
     if (window.history.replaceState) {
       window.history.replaceState(null, null, window.location.href);
     }
+  </script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+    $('#table').DataTable();
+});
   </script>
 </html>
