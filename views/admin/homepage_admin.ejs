@@ -1,51 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include('../partials/admin_header.ejs') %>
-<section class=" bg-light">
+  <section class="bg-light">
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Admin Panel</a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="#" tabindex="-1">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-      <a href="/admin/adminlogout"><button>logout</button></a>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Admin Panel</a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" tabindex="-1">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+            <div class="p-2">
+              <a href="/admin/adminlogout"><button class="btn btn-outline-success my-2 my-sm-0">
+            Log Out
+          </button></a>
+            </div>
+          </div>
+        </div>
+      </nav>
     </div>
-  </div>
-</nav>
-    </div>
-</section>
-    
-    <section>
+  </section>
+
+  <section>
     <div class="container mt-5">
-        <% allUsers.forEach((allUsers)=>{ %>
+        <div class="d-flex justify-content-end"> 
+            <div>
+                <a href=""><button type="button" class="btn btn-success">Add User</button></a>
+            </div>
+        </div>
+        
+      
       <table class="table mt-5 table-hover table-light">
         <thead>
           <tr>
             <th class="col-3 col-md-3 col-lg-3 col-xl-1 text-center">Sl.No</th>
             <th class="col-3 col-md-3 col-lg-3 col-xl-3 text-center">Name</th>
             <th class="col-3 col-md-3 col-lg-3 col-xl-2 text-center">Email</th>
-            <th class="col-3 col-md-3 col-lg-3 col-xl-2 text-center">
-              Option
-            </th>
+            <th class="col-3 col-md-3 col-lg-3 col-xl-2 text-center">Option</th>
           </tr>
         </thead>
         <tbody>
+          <% allUsers.forEach((allUsers,index)=>{ %>
           <tr>
-            <th class="col-3 col-md-3 col-lg-3 col-xl-1 text-center">1</th>
+            <td class="col-3 col-md-3 col-lg-3 col-xl-1 text-center"><%= index + 1 %></td>
             <td class="col-3 col-md-3 col-lg-3 col-xl-2 text-center">
               <%= allUsers.name %>
             </td>
@@ -53,13 +69,18 @@
               <%= allUsers.email %>
             </td>
             <td class="col-3 col-md-3 col-lg-3 col-xl-6 text-center">
-              <a href=""><button type="button" class="btn btn-info">Edit</button></a>
-              <a href=""><button type="button" class="btn btn-danger">Delete</button></a>
+              <a href=""
+                ><button type="button" class="btn btn-info">Edit</button></a
+              >
+              <a href="/admin/deleteuser/<%= allUsers._id %>"
+                ><button type="button" class="btn btn-danger">Delete</button></a
+              >
             </td>
           </tr>
+          <% }) %>
         </tbody>
       </table>
-      <% }) %>
+      
     </div>
   </section>
   <script>

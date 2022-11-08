@@ -1,6 +1,7 @@
 const express = require("express");
 const admin = require("../helpers/admin_helper");
 const db = require("../confi/connection");
+const { response } = require("express");
 const router = express.Router();
 const loginDetails = {
     email:"akshay@a",
@@ -17,7 +18,7 @@ router.get("/", (req, res, next) => {
 });
 router.get("/adminhome", (req, res) => {
   admin.getAllUsers().then((allUsers) => {
-    console.log(allUsers);
+    //console.log(allUsers);
     session = req.session;
     if (session.adminId) {
       res.render("admin/homepage_admin", { allUsers });
@@ -38,10 +39,17 @@ router.post('/adminlogin',(req,res)=>{
       res.render("admin/login_admin", { err_message: "username or password incorrect" });
     }
 
-})
+});
 
 router.get("/adminlogout", (req, res) => {
   req.session.destroy();
   res.redirect("/admin");
-});    
+});
+router.get('/deleteuser/:id',(req,res)=>{
+  let id = req.params.id;
+  console.log(req.params.id);
+  admin.deleteUser(id).then((response)=>{
+    res.redirect('/admin/adminhome');
+  })
+})    
 module.exports = router;
