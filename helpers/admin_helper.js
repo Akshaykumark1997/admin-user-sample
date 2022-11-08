@@ -24,5 +24,23 @@ module.exports ={
                 resolve(data);
               });
         });
+    },editUser:(id)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection('users').findOne({_id:objectId(id)}).then((data)=>{
+            resolve(data);
+        }); 
+        })
+    },
+    editUserDetails:(id,userDetails)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection('users').updateOne({_id:objectId(id)},{
+                $set:{
+                    name:userDetails.name,
+                    email:userDetails.email
+                }
+            }).then((response)=>{
+                resolve();
+            });
+        });
     }
 }
