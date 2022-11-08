@@ -44,7 +44,7 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-end"> 
             <div>
-                <a href=""><button type="button" class="btn btn-success">Add User</button></a>
+                <a href="/admin/adduser"><button type="button" class="btn btn-success">Add User</button></a>
             </div>
         </div>
         
@@ -72,8 +72,8 @@
               <a href=""
                 ><button type="button" class="btn btn-info">Edit</button></a
               >
-              <a href="/admin/deleteuser/<%= allUsers._id %>"
-                ><button type="button" class="btn btn-danger">Delete</button></a
+              <a href="/admin/deleteuser/<%= allUsers._id %>" 
+                ><button type="button" class="btn btn-danger" onclick="return confirm('are you sure <%= allUsers.name %>')">Delete</button></a
               >
             </td>
           </tr>

@@ -1,6 +1,7 @@
 const { response } = require("express");
 const db = require("../confi/connection");
 const objectId = require('mongodb').ObjectId;
+const bcrypt = require("bcrypt");
 
 module.exports ={
     getAllUsers:()=>{
@@ -15,6 +16,13 @@ module.exports ={
                 resolve(response);
             });
         });
-
+    },
+    addUser:(newuser)=>{
+        return new Promise(async(resolve,reject)=>{
+            newuser.password = await bcrypt.hash(newuser.password, 10);
+            db.get().collection("users").insertOne(newuser).then((data) => {
+                resolve(data);
+              });
+        });
     }
 }

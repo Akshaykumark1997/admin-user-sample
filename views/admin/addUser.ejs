@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <section class="bg-light">
-    <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="px-5 ms-xl-4">
-          <i class="me-3 pt-5 mt-xl-4" style="color: #709085"></i>
-          <span class="h1 fw-bold mb-0">Admin Panel</span>
-        </div>
-      </nav>
-    </div>
-  </section>
+    <%- include('../partials/admin_header.ejs') %>
   <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -20,35 +11,46 @@
           >
             <div class="card-body p-5 text-center">
               <div class="mb-md-5 mt-md-4 pb-5">
-                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                <h2 class="fw-bold mb-2 text-uppercase">Add User</h2>
                 <p class="text-white-50 mb-5">
                   Please enter your login and password!
                 </p>
-                <form action="/admin/adminlogin" method="post">
+                <form action="/admin/submitUser" method="post" onsubmit="return checkLoginForm(this);">
+                    <div class="form-outline form-white mb-4">
+                    <input
+                      type="name" name="name"
+                      id="name"
+                      class="form-control form-control-lg"
+                    />
+                    <label class="form-label" for="typeEmailX">User's Name</label>
+                    <p id="nameError" style="color: red"></p>
+                  </div>
                   <div class="form-outline form-white mb-4">
                     <input
                       type="email" name="email"
-                      id="typeEmailX"
+                      id="email"
                       class="form-control form-control-lg"
                     />
-                    <label class="form-label" for="typeEmailX">Email</label>
+                    <label class="form-label" for="typeEmailX">User's Email</label>
+                    <p id="emailError" style="color: red"></p>
                   </div>
 
                   <div class="form-outline form-white mb-4">
                     <input
                       type="password" name="password"
-                      id="typePasswordX"
+                      id="password"
                       class="form-control form-control-lg"
                     />
                     <label class="form-label" for="typePasswordX"
-                      >Password</label
+                      >User's Password</label
                     >
                   </div>
-                  <button
+                  <p id="passwordError" style="color: red"></p>
+                 <a href=""><button
                     class="btn btn-outline-primary btn-lg px-5 mt-5"
-                    type="submit" value="login"
-                  >
-                    Login
+                    type="submit" value="submit"
+                  ></a> 
+                    Submit
                   </button>
                 </form>
               </div>
@@ -58,3 +60,4 @@
       </div>
     </div>
   </section>
+  <script src="/javascript/main.js"></script>

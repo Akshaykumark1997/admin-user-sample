@@ -50,6 +50,14 @@ router.get('/deleteuser/:id',(req,res)=>{
   console.log(req.params.id);
   admin.deleteUser(id).then((response)=>{
     res.redirect('/admin/adminhome');
+  });
+});
+router.get('/adduser',(req,res)=>{
+  res.render('admin/addUser');
+});
+router.post('/submitUser',(req,res)=>{
+  admin.addUser(req.body).then((data)=>{
+    res.redirect('/admin/adminhome');
   })
 })    
 module.exports = router;
